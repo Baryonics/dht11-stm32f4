@@ -95,10 +95,18 @@ DHT11_Status DHT11_read(uint16_t *temp, uint16_t *rhm)
 {
   uint8_t data[5] ={0};
   DHT11_Status status = start_signal();
+  uint8_t checksum = 0;
   for (uint8_t i = 0; i < 5; i++)
   {
     status = read_byte(&data[i]);
   }
+
+  checksum = data[0] + data[1] + data[2] + data[3];
+  if (checksum != data[4])
+  {
+    status = DHT11_CHECKSUM_ERR;
+  }
+  
   *rhm = (uint16_t)data[0];
   *temp = (uint16_t)data[2];
 
@@ -139,6 +147,7 @@ static DHT11_Status read_byte(uint8_t *byte)
     }
     status = wait_until(GPIO_PIN_RESET, 70);
   }
+  
   return status;
 }
 
