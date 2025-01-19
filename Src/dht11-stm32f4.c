@@ -30,9 +30,7 @@ void set_pin_input();
 /**
  * @brief Delays the program execution for a specified number of microseconds.
  * 
- * This function provides a delay in microseconds, which is useful for timing
- * operations in embedded systems, such as sensor communication or precise
- * control tasks.
+ * This function provides a delay in microseconds.
  * 
  * @param us The number of microseconds to delay.
  */
