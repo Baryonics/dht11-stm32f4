@@ -12,7 +12,7 @@ TIM_HandleTypeDef *_htim;
  * 
  * @note Ensure that the pin is correctly initialized before calling this function.
  */
-void set_pin_output();
+static void set_pin_output();
 
 
 
@@ -23,7 +23,7 @@ void set_pin_output();
  * data from external devices or sensors. It is typically used in scenarios
  * where the pin needs to receive signals rather than send them.
  */
-void set_pin_input();
+static void set_pin_input();
 
 
 
@@ -34,7 +34,7 @@ void set_pin_input();
  * 
  * @param us The number of microseconds to delay.
  */
-void delay_us(uint16_t us);
+static void delay_us(uint16_t us);
 
 
 
@@ -46,7 +46,7 @@ void delay_us(uint16_t us);
  * 
  * @return DHT11_Status 
  */
-DHT11_Status start_signal();
+static DHT11_Status start_signal();
 
 
 
@@ -59,7 +59,7 @@ DHT11_Status start_signal();
  * @param[out] byte Pointer to a uint8_t variable where the read byte will be stored.
  * @return DHT11_Status Status of the read operation.
  */
-DHT11_Status read_byte(uint8_t *byte);
+static DHT11_Status read_byte(uint8_t *byte);
 
 
 
@@ -70,7 +70,7 @@ DHT11_Status read_byte(uint8_t *byte);
  * @retval DHT11_Status: Returns DHT11_OK if the desired state is reached within the maximum time,
  *                       otherwise returns DHT11_TIMEOUT.
  */
-DHT11_Status wait_until(uint8_t set_reset, int max_time);
+static DHT11_Status wait_until(uint8_t set_reset, int max_time);
 
 
 
@@ -107,7 +107,7 @@ DHT11_Status DHT11_read(uint16_t *temp, uint16_t *rhm)
 
 
 
-DHT11_Status start_signal()
+static DHT11_Status start_signal()
 {
   DHT11_Status status;
   set_pin_output();
@@ -122,7 +122,7 @@ DHT11_Status start_signal()
 
 
 
-DHT11_Status read_byte(uint8_t *byte)
+static DHT11_Status read_byte(uint8_t *byte)
 {
   *byte = 0;
   DHT11_Status status = DHT11_ERR;
@@ -144,7 +144,7 @@ DHT11_Status read_byte(uint8_t *byte)
 
 
 
-void delay_us(uint16_t us)
+static void delay_us(uint16_t us)
 {
 	__HAL_TIM_SET_COUNTER(_htim,0);
 	while (__HAL_TIM_GET_COUNTER(_htim) < us);
@@ -152,7 +152,7 @@ void delay_us(uint16_t us)
 
 
 
-DHT11_Status wait_until (uint8_t set_reset, int max_time)
+static DHT11_Status wait_until (uint8_t set_reset, int max_time)
 { 
   int start_time = __HAL_TIM_GET_COUNTER(_htim);
   int delta_time = 0;
@@ -172,7 +172,7 @@ DHT11_Status wait_until (uint8_t set_reset, int max_time)
 
 
 
-void set_pin_output()
+static void set_pin_output()
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   GPIO_InitStruct.Pin = DHT11_Pin;
@@ -184,7 +184,7 @@ void set_pin_output()
 
 
 
-void set_pin_input()
+static void set_pin_input()
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   GPIO_InitStruct.Pin = DHT11_Pin;

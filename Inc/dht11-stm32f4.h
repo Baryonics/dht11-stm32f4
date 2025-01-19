@@ -23,10 +23,27 @@ typedef enum {
  *              so that one timer tick equals one microsecond. 
  *              For the STM32F401RE with default CubeMX settings, the prescaler should be set to 84.
  */
-void dht11_init(GPIO_TypeDef *GPIO_Port, uint16_t GPIO_Pin,TIM_HandleTypeDef htim);
+DHT11_Status DHT11_init(
+  GPIO_TypeDef *GPIO_Port,
+  uint16_t GPIO_Pin,
+  TIM_HandleTypeDef *htim
+);
 
 
 
-unsigned int get_T();
+/**
+ * @brief Reads the temperature and relative humidity from the DHT11 sensor.
+ * 
+ * @param[out] temp Pointer to a variable where the temperature value will be stored.
+ *                  The temperature is represented as an integer value.
+ * @param[out] rhm  Pointer to a variable where the relative humidity value will be stored.
+ *                  The relative humidity is represented as an integer value.
+ * 
+ * @return DHT11_Status Status of the read operation. It indicates whether the read was successful or if there was an error.
+ */
+DHT11_Status DHT11_read(uint16_t *temp, uint16_t *rhm);
+
+
+
 
 #endif
