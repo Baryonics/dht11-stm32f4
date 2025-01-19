@@ -6,7 +6,6 @@ This library provides an interface for the DHT11 temperature and humidity sensor
 
 - Read temperature and humidity data from the DHT11 sensor
 - Simple API for easy integration
-- Non-blocking data acquisition
 
 ## Requirements
 
@@ -32,12 +31,12 @@ This library provides an interface for the DHT11 temperature and humidity sensor
     ```
 
 ## Usage
-
-1. Initialize the DHT11 sensor:
+1. Initialize the DHT11 sensor (ensure the timer `htim` is prescaled so that one tick equals one microsecond. For the Nucleo F401RE, set the prescaler to 84):
+2. Initialize the DHT11 sensor:
     ```c
     DHT11_Init(DHT11_DATA_Port, DHT11_DATA_Pin, htim);
     ```
-2. Read data from the sensor:
+3. Read data from the sensor:
     ```c
     uint16_t temp;
     uint16_t rh;
