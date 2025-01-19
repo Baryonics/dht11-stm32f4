@@ -6,7 +6,7 @@
 #define TIMEOUT 100
 
 typedef enum {
-    DHT11_OK = 1,
+    DHT11_OK = 0,
     DHT11_CHECKSUM_ERR = -1,
     DHT11_TIMEOUT = -2,
     DHT11_ERR = -3
